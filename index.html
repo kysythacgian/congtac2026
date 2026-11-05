@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Báo cáo kết quả công tác Hội năm 2026</title>
+<script src="https://unpkg.com/docx@7.1.0/build/index.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<style>
+/* ===================== RESET & ROOT ===================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue:        #7f1032;
+  --blue-mid:    #b71c4a;
+  --blue-light:  #d81b60;
+  --blue-bright: #e91e63;
+  --gold:       #f9a825;
+  --gold-light: #ffd54f;
+  --gold-pale:  #fff8e1;
+  --cream:      #fff8fa;
+  --white:      #ffffff;
+  --text-dark:  #2a0a14;
+  --text-mid:   #3a1020;
+  --shadow-blue: rgba(127,16,50,0.35);
+  --shadow-gold:rgba(249,168,37,0.4);
+  --primary: #b71c4a;
+  --primary-dark: #7f1032;
+  --bg: #fff2f6;
+  --success: #4caf50;
+  --error: #f44336;
+  --warning: #ff9800;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: var(--cream);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  color: #333;
+  margin: 0;
+  padding: 10px;
+}
+
+/* ===================== BACKGROUND CARO ===================== */
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%,   rgba(127,16,50,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 90% 100%,  rgba(249,168,37,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 10% 80%,   rgba(127,16,50,0.10) 0%, transparent 60%),
+    var(--cream);
+  pointer-events: none;
+}
+
+.bg-pattern {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.06;
+  background-image:
+    repeating-linear-gradient(45deg, #7f1032 0, #7f1032 1.2px, transparent 0, transparent 50%),
+    repeating-linear-gradient(-45deg, #7f1032 0, #7f1032 1.2px, transparent 0, transparent 50%);
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 1000px;
+  margin: auto;
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.logo {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.logo img {
+  width: 120px;
+  height: auto;
+  display: block;
+  margin: 0 auto 10px;
+  object-fit: contain;
+
+  filter: drop-shadow(0 3px 8px rgba(0,0,0,0.28));
+
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.app-header {
+  text-align: center;
+  border-bottom: 2px solid var(--primary);
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+}
+
+.app-header h1 {
+  color: var(--primary);
+  margin: 0;
+  font-size: 17px;
+  
+  font-family: "Times New Roman", Georgia, serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.app-header p {
+  margin: 8px 0 0;
+  color: #b71c4a;
+  
+  font-style: italic;
+}
+
+.details-info {
+  background: #fde7ee;
+  border: 1px solid #f8bbd0;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  cursor: pointer;
+}
+
+.details-info summary {
+  padding: 12px;
+  font-weight: bold;
+  color: var(--primary-dark);
+  outline: none;
+}
+
+.details-info .content {
+  padding: 15px;
+  font-size: 14px;
+  line-height: 1.6;
+  border-top: 1px solid #f8bbd0;
+  background: #fff;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #222;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: 0.3s;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(183,28,74,0.15);
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.section-head {
+  background: #fde7ee;
+  padding: 12px 15px;
+  margin: 25px 0 15px;
+  border-left: 2px solid var(--primary);
+  border-right: 2px solid var(--primary);
+  font-weight: bold;
+  font-size: 16px;
+  color: var(--primary-dark);
+  border-radius: 3px 3px 3px 3px;
+}
+
+.sub-section {
+  margin: 15px 0 10px;
+  padding-left: 15px;
+  border-left: 2px solid #f8bbd0;
+  border-right: 2px solid #f8bbd0;
+  font-weight: 600;
+  color: #7f1032;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+button {
+  flex: none;
+  min-width: 150px;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+button:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+button:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.btn-word {
+  background: linear-gradient(135deg, #b71c4a, #8e1b3a);
+  box-shadow: 0 4px 15px rgba(0, 0, 255, 0.3);
+}
+
+.btn-word:hover {
+  background: linear-gradient(135deg, #8e1b3a, #6d1230);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 255, 0.4);
+}
+
+.btn-send {
+  background: linear-gradient(135deg, #f9a825, #e69500);
+  box-shadow: 0 4px 15px rgba(0, 219, 255, 0.3);
+}
+
+.btn-send:hover {
+  background: linear-gradient(135deg, #e69500, #c98000);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 219, 255, 0.4);
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+  filter: grayscale(0.1);
+}
+
+button:disabled:active {
+  transform: none !important;
+}
+
+.site-footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 15px;
+  margin-top: 25px;
+  font-size: 14px;
+  color: #b71c4a;
+  border-top: 1px solid #f8bbd0;
+}
+
+.hint {
+  font-size: 12px;
+  color: #888;
+  margin-top: 5px;
+}
+
+/* ===== NÚT ADMIN ===== */
+.btn-admin {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: none;
+  border: 1.5px solid rgba(183,28,74,0.35);
+  border-radius: 8px;
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #b71c4a;
+  cursor: pointer;
+  text-decoration: none;
+  margin-top: 10px;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.btn-admin:hover {
+  background: rgba(183,28,74,0.07);
+  border-color: #b71c4a;
+  color: #7f1032;
+}
+
+.uppercase-hint {
+  font-size: 11px;
+  color: #b71c4a;
+  margin-top: 4px;
+}
+
+/* ===================== CUSTOM SEARCHABLE SELECT ===================== */
+.custom-select-wrapper {
+  position: relative;
+}
+
+.custom-select-display {
+  width: 100%;
+  padding: 13px 15px;
+  border: 2px solid var(--primary);
+  border-radius: 10px;
+  font-size: 15px;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(183,28,74,0.08);
+  transition: 0.2s;
+  user-select: none;
+}
+
+.custom-select-display:hover,
+.custom-select-display:focus {
+  border-color: var(--primary-dark);
+  box-shadow: 0 0 0 4px rgba(183,28,74,0.15);
+  outline: none;
+}
+
+.custom-select-display.selected {
+  color: #2a0a14;
+  font-weight: 600;
+}
+
+.custom-select-display .placeholder {
+  color: #aaa;
+  font-weight: normal;
+}
+
+.select-arrow {
+  font-size: 11px;
+  color: var(--primary);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+.custom-select-display.open .select-arrow {
+  transform: rotate(180deg);
+}
+
+.custom-select-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0; right: 0;
+  background: white;
+  border: 1.5px solid #f8bbd0;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(183,28,74,0.15);
+  z-index: 999;
+  overflow: hidden;
+  animation: slideDown 0.18s ease;
+}
+
+.custom-select-dropdown input[type="text"] {
+  border: none;
+  border-bottom: 1px solid #f8bbd0;
+  border-radius: 0;
+  padding: 10px 14px;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.custom-select-dropdown input[type="text"]:focus {
+  border-color: #f8bbd0;
+  box-shadow: none;
+  outline: none;
+}
+
+.custom-select-dropdown ul {
+  list-style: none;
+  max-height: 220px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 6px 0;
+}
+
+.custom-select-dropdown ul li {
+  padding: 10px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+  color: #333;
+}
+
+.custom-select-dropdown ul li:hover,
+.custom-select-dropdown ul li.active {
+  background: #fde7ee;
+  color: var(--primary-dark);
+  font-weight: 600;
+}
+
+.no-result {
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #aaa;
+  text-align: center;
+}
+
+/* ===================== MAIN INPUT GROUP ===================== */
+.main-input-group label {
+  font-size: 15px;
+  color: var(--primary-dark);
+}
+
+.main-input-group input {
+  font-size: 15px;
+  border: 2px solid var(--primary);
+  border-radius: 10px;
+  padding: 13px 15px;
+  box-shadow: 0 2px 8px rgba(183,28,74,0.08);
+}
+
+.main-input-group input:focus {
+  border-color: var(--primary-dark);
+  box-shadow: 0 0 0 4px rgba(183,28,74,0.15);
+}
+
+/* ===================== DATETIME BADGE ===================== */
+.datetime-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  background: #fde7ee;
+  border: 1px solid #f8bbd0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 16px;
+  color: #7f1032;
+}
+
+.btn-adjust-date {
+  background: none;
+  border: 1.5px solid #b71c4a;
+  color: #b71c4a;
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: auto;
+  flex: none;
+  transition: all 0.2s;
+  box-shadow: none;
+}
+
+.btn-adjust-date:hover {
+  background: #b71c4a;
+  color: white;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-adjust-date:active {
+  transform: none;
+}
+
+/* ===================== DATE PANEL ===================== */
+.date-panel {
+  background: #fff8fa;
+  border: 1.5px dashed #f9a825;
+  border-radius: 10px;
+  padding: 16px 18px 14px;
+  margin-top: 12px;
+  animation: slideDown 0.25s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.date-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+  color: #e65100;
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+
+.btn-close-panel {
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+  min-width: auto;
+  box-shadow: none;
+  line-height: 1;
+}
+
+.btn-close-panel:hover { color: #b71c4a; transform: none; background: none; }
+.btn-close-panel:active { transform: none; }
+
+.date-panel-note {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #e65100;
+  background: #fff3e0;
+  border-radius: 6px;
+  padding: 7px 10px;
+}
+
+/* ===================== TOAST NOTIFICATION ===================== */
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  min-width: 300px;
+  max-width: 450px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  animation: slideInRight 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.toast.hide {
+  animation: slideOutRight 0.3s ease forwards;
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+@keyframes slideOutRight {
+  from { transform: translateX(0);    opacity: 1; }
+  to   { transform: translateX(100%); opacity: 0; }
+}
+
+.toast-icon { font-size: 24px; flex-shrink: 0; }
+.toast-content { flex: 1; }
+.toast-title { font-weight: bold; font-size: 15px; margin-bottom: 4px; }
+.toast-message { font-size: 13px; color: #666; line-height: 1.4; }
+
+.toast-close {
+  background: none; border: none; font-size: 20px;
+  cursor: pointer; color: #999; padding: 0; min-width: auto; box-shadow: none; transition: color 0.2s;
+}
+.toast-close:hover { color: #333; transform: none; background: none; }
+.toast-close:active { transform: none; }
+
+.toast-progress { position: absolute; bottom: 0; left: 0; height: 3px; background: rgba(0,0,0,0.1); width: 100%; }
+.toast-progress-bar { height: 100%; width: 100%; background: currentColor; animation: progress 3s linear forwards; }
+@keyframes progress { from { width: 100%; } to { width: 0%; } }
+
+.toast-success { border-left: 4px solid var(--success); }
+.toast-success .toast-icon { color: var(--success); }
+.toast-success .toast-progress-bar { background: var(--success); }
+
+.toast-error { border-left: 4px solid var(--error); }
+.toast-error .toast-icon { color: var(--error); }
+.toast-error .toast-progress-bar { background: var(--error); }
+
+.toast-warning { border-left: 4px solid var(--warning); }
+.toast-warning .toast-icon { color: var(--warning); }
+.toast-warning .toast-progress-bar { background: var(--warning); }
+
+.toast-info { border-left: 4px solid var(--primary); }
+.toast-info .toast-icon { color: var(--primary); }
+.toast-info .toast-progress-bar { background: var(--primary); }
+
+/* ===================== CONFIRM MODAL ===================== */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.45);
+  z-index: 10000; display: flex; align-items: center; justify-content: center; animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.modal-box {
+  background: #fff; border-radius: 14px; box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  padding: 32px 28px 24px; max-width: 360px; width: 90%; text-align: center;
+  animation: popIn 0.25s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes popIn { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+.modal-icon { font-size: 44px; margin-bottom: 12px; }
+.modal-title { font-size: 18px; font-weight: 700; color: #222; margin-bottom: 8px; }
+.modal-msg { font-size: 14px; color: #555; line-height: 1.5; margin-bottom: 24px; }
+.modal-actions { display: flex; gap: 12px; justify-content: center; }
+.modal-btn {
+  padding: 11px 28px; border-radius: 8px; font-size: 15px; font-weight: 600;
+  border: none; cursor: pointer; min-width: 110px; transition: all 0.2s; color: white;
+}
+.modal-btn-cancel { background: #9e9e9e; }
+.modal-btn-cancel:hover { background: #757575; }
+.modal-btn-confirm-blue { background: linear-gradient(135deg, #b71c4a, #8e1b3a); }
+.modal-btn-confirm-blue:hover { background: linear-gradient(135deg, #8e1b3a, #6d1230); }
+.modal-btn-confirm-cyan { background: linear-gradient(135deg, #f9a825, #e69500); }
+.modal-btn-confirm-cyan:hover { background: linear-gradient(135deg, #e69500, #c98000); }
+/* ================= LOGIN ================= */
+#loginOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 15% 20%,  rgba(255,170,200,0.55), transparent 38%),
+    radial-gradient(circle at 85% 15%,  rgba(255,120,160,0.30),   transparent 35%),
+    radial-gradient(circle at 70% 80%,  rgba(255,150,180,0.38), transparent 40%),
+    radial-gradient(circle at 20% 80%,  rgba(255,190,210,0.30), transparent 36%),
+    radial-gradient(circle at 50% 50%,  rgba(255,220,230,0.18), transparent 55%),
+    linear-gradient(160deg, #ffd6e2 0%, #ffc2d4 25%, #ffd0de 55%, #ffe0ea 80%, #fff0f4 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 390px;
+  background: rgba(255,255,255,0.52);
+  border: 1px solid rgba(255,255,255,0.70);
+  border-radius: 28px;
+  padding: 38px 28px;
+  text-align: center;
+  box-shadow:
+    0 10px 40px rgba(127,16,50,0.14),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-sizing: border-box;
+  animation: loginPop .35s ease;
+}
+
+@keyframes loginPop {
+  from { transform: scale(.9); opacity: 0; }
+  to   { transform: scale(1);  opacity: 1; }
+}
+
+.login-logo {
+  width:150px !important;
+  height:150px !important;
+  object-fit: contain;
+  margin-bottom: 18px;
+  filter: drop-shadow(0 6px 16px rgba(0,100,200,0.20));
+}
+
+.login-title {
+  color: #7f1032;
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  letter-spacing: .5px;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+}
+
+.login-subtitle {
+  color: #8a4660;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.login-input-wrap {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+#loginPassword {
+  width: 100%;
+  height: 56px;
+  border: none;
+  outline: none;
+  border-radius: 16px;
+  padding: 0 46px 0 18px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #3a1020;
+  background: rgba(255,255,255,0.96);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.08);
+  box-sizing: border-box;
+  transition: box-shadow .2s;
+}
+
+#loginPassword:focus {
+  background: #fff;
+  box-shadow:
+    0 0 0 3px rgba(255,111,145,0.35),
+    inset 0 1px 2px rgba(0,0,0,0.06);
+}
+
+#loginPassword::placeholder {
+  color: #b48a9c;
+  font-weight: 500;
+}
+
+#loginPassword:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#togglePassword {
+  position: absolute;
+  top: 50%;
+  right: -50px;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .2s;
+}
+
+#togglePassword:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+#loginBtn {
+  width: 100%;
+  min-height: 56px;
+  height: auto;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ff6f91, #c2185b);
+  color: white;
+  font-size: 17px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s, opacity .2s;
+  box-shadow: 0 8px 24px rgba(194,24,91,.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 12px 16px;
+  line-height: 1.3;
+}
+
+#loginBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(194,24,91,.45);
+}
+
+#loginBtn:active {
+  transform: scale(.98);
+}
+
+#loginBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+#loginError {
+  display: none;
+  margin-bottom: 14px;
+  color: #c62828;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* ===== HƯỚNG DẪN TRONG LOGIN ===== */
+.login-guide-details {
+  background: rgba(255,255,255,0.7);
+  border: 1px solid rgba(127,16,50,0.2);
+  border-radius: 14px;
+  margin-bottom: 20px;
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.login-guide-details summary {
+  padding: 13px 16px;
+  font-weight: 700;
+  color: #7f1032;
+  font-size: 14px;
+  outline: none;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.login-guide-details summary::-webkit-details-marker { display: none; }
+
+.login-guide-details[open] summary {
+  border-bottom: 1px solid rgba(127,16,50,0.15);
+}
+
+.login-guide-content {
+  padding: 14px 16px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #5a2038;
+}
+
+.login-guide-content p { margin-bottom: 8px; }
+.login-guide-content ul { padding-left: 18px; margin-bottom: 8px; }
+.login-guide-content li { margin-bottom: 3px; }
+
+.login-guide-details summary {
+  padding: 14px 16px;
+  font-weight: 700;
+  color: #7f1032;
+  font-size: 14px;
+  outline: none;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.login-guide-details summary:hover {
+  background: rgba(127,16,50,0.05);
+}
+
+.login-guide-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.guide-arrow {
+  font-size: 12px;
+  transition: transform 0.25s ease;
+  color: #b71c4a;
+}
+
+.login-guide-details[open] .guide-arrow {
+  transform: rotate(180deg);
+}
+/* ===== MOBILE ===== */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 30px 20px;
+    border-radius: 15px;
+  }
+
+  .login-logo {
+    width: 110px;
+    height: 110px;
+  }
+
+  .login-title {
+    font-size: 17px;
+  }
+
+  .login-subtitle {
+    font-size: 14px;
+  }
+
+  #loginPassword,
+  #loginBtn {
+    height: 50px;
+    font-size: 15px;
+  }
+}
+</style>
+</head>
+<body>
+  <!-- ===== LOGIN SCREEN ===== -->
+<div id="loginOverlay">
+  <div class="login-card">
+
+    <!-- Logo -->
+    <img src="icon.png" class="login-logo" alt="Logo">
+
+    <!-- Tiêu đề -->
+    <div class="login-title">
+      BÁO CÁO KẾT QUẢ<br>CÔNG TÁC HỘI NĂM 2026
+ </div>
+
+    <div class="login-subtitle">
+      <b>HỘI LIÊN HIỆP PHỤ NỮ PHƯỜNG THANH KHÊ<br>THÀNH PHỐ ĐÀ NẴNG</b><br><span style="display:inline-block;margin-top:8px;padding:3px 12px;border-radius:99px;background:#fff0c9;color:#8a5a00;font-size:12px;">Thời gian báo cáo: tháng 7/2026 – tháng 11/2026</span>
+    </div>
+
+    <!-- Mục hướng dẫn xổ ra -->
+    <details class="login-guide-details">
+  <summary>
+    <span>📋 Hướng dẫn sử dụng</span>
+    <span class="guide-arrow">▼</span>
+  </summary>
+      <div class="login-guide-content">
+        <p><b>⏰ Kỳ báo cáo:</b> từ <b>tháng 7/2026 đến tháng 11/2026</b> (gửi <b>một lần</b> cho cả kỳ).</p>
+        <p><b>📝 Cách nhập:</b></p>
+        <ul>
+          <li>Chọn <b>Chi hội</b> từ danh sách.</li>
+          <li>Điền nội dung vào <b>8 mục</b> báo cáo.</li>
+        </ul>
+        <p><b>📤 Gửi báo cáo:</b></p>
+        <ul>
+          <li><b>📄 Tải Word:</b> lưu file tại chi hội để tra cứu.</li>
+          <li><b>☁️ Gửi báo cáo:</b> gửi về Hội LHPN phường (có thể gửi lại để cập nhật).</li>
+        </ul>
+      </div>
+    </details>
+
+    <button id="loginBtn">
+  📝 Lập báo cáo
+  <span style="font-size:11px;font-weight:normal;opacity:0.85;">
+    (Dành cho các chi hội phụ nữ)
+  </span>
+</button>
+
+    <!-- Nút truy cập quản trị -->
+    <button id="adminBtn" onclick="window.location.href='admin.html'" style="background: transparent; border: 2px solid #00695c; color: #00695c; box-shadow: none; margin-top: 10px; width: 100%; min-height: 56px; height: auto; padding: 12px 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; line-height: 1.3;">
+      <span style="font-size:15px; font-weight:bold;">🔐 Truy cập quản trị</span>
+      <span style="font-size:11px; font-weight:normal; opacity:0.85;">(Dành cho BTV Hội LHPN phường theo dõi, tổng hợp, tải Excel)</span>
+    </button>
+
+  </div>
+</div>
+<div class="bg-layer"></div>
+<div class="bg-pattern"></div>
+
+<div class="logo">
+  <img src="icon.png" alt="Logo">
+</div>
+
+<div class="container">
+  <div class="app-header">
+    <h1>BÁO CÁO KẾT QUẢ <br> CÔNG TÁC HỘI NĂM 2026</h1>
+    <p><i>(Thời gian: từ tháng 7/2026 đến tháng 11/2026)</i><br><i>Chi hội phụ nữ khu dân cư</i></p>
+  </div>
+
+  <!-- Mục hướng dẫn xổ ra -->
+<details class="login-guide-details" id="welcomeGuide">
+  <summary>
+    <span>📋 Hướng dẫn sử dụng</span>
+    <span class="guide-arrow">▼</span>
+  </summary>
+
+  <div class="login-guide-content">
+        <p><b>⏰ Kỳ báo cáo:</b> từ <b>tháng 7/2026 đến tháng 11/2026</b> (gửi <b>một lần</b> cho cả kỳ).</p>
+        <p><b>📝 Cách nhập:</b></p>
+        <ul>
+          <li>Chọn <b>Chi hội</b> từ danh sách.</li>
+          <li>Điền nội dung vào <b>8 mục</b> báo cáo.</li>
+        </ul>
+        <p><b>📤 Gửi báo cáo:</b></p>
+        <ul>
+          <li><b>📄 Tải Word:</b> lưu file tại chi hội để tra cứu.</li>
+          <li><b>☁️ Gửi báo cáo:</b> gửi về Hội LHPN phường (có thể gửi lại để cập nhật).</li>
+        </ul>
+      </div>
+</details>
+
+  <!-- PHƯỜNG: ẩn, cố định -->
+  <input type="hidden" id="phuong" value="THANH KHÊ">
+
+  <!-- Ô nhập chính: CHI HỘI (searchable select) -->
+  <div class="form-group main-input-group">
+    <label>Chi hội: *</label>
+    <input type="hidden" id="chiHoi">
+    <div class="custom-select-wrapper" id="chiHoiWrapper">
+      <div class="custom-select-display" id="chiHoiDisplay" onclick="toggleChiHoiDropdown()" tabindex="0">
+        <span id="chiHoiText" class="placeholder">Chọn chi hội...</span>
+        <span class="select-arrow">▼</span>
+      </div>
+      <div class="custom-select-dropdown" id="chiHoiDropdown" style="display:none;">
+        <input type="text" id="chiHoiSearch" placeholder="🔍 Tìm chi hội..." autocomplete="off" onclick="event.stopPropagation()">
+        <ul id="chiHoiList"></ul>
+        <div class="no-result" id="chiHoiNoResult" style="display:none;">Không tìm thấy chi hội</div>
+      </div>
+    </div>
+    <div class="datetime-badge" id="dateTimeBadge"><span>📅 Kỳ báo cáo: <b>tháng 7/2026 – tháng 11/2026</b></span></div>
+  </div>
+
+    <div class="section-head">NỘI DUNG BÁO CÁO (THÁNG 7/2026 – THÁNG 11/2026)</div>
+
+  <div class="form-group">
+    <label>1. Tham mưu cấp ủy:</label>
+    <div class="hint">Các nội dung chi hội đã tham mưu Chi bộ/cấp ủy khu dân cư và kết quả.</div>
+    <textarea id="thamMuu" placeholder="Nội dung đã tham mưu, kết quả được cấp ủy chỉ đạo, ghi nhận..."></textarea>
+  </div>
+
+  <div class="form-group">
+    <label>2. Phối hợp Tổ dân phố, các hội đoàn thể khu dân cư:</label>
+    <div class="hint">Phối hợp với Tổ dân phố, Hội Cựu chiến binh, Hội Người cao tuổi, Đoàn thanh niên, Mặt trận...</div>
+    <textarea id="phoiHop" placeholder="Nội dung phối hợp, kết quả..."></textarea>
+  </div>
+
+  <div class="form-group">
+    <label>3. Mô hình mới của Chi hội:</label>
+    <div class="hint">Mô hình mới thành lập hoặc triển khai trong kỳ báo cáo.</div>
+    <textarea id="moHinhMoi" placeholder="Tên mô hình, cách làm, kết quả, khả năng nhân rộng..."></textarea>
+  </div>
+
+  <div class="form-group">
+    <label>4. Kết quả công tác Hội:</label>
+    <div class="hint">Cuộc vận động “5 không, 3 sạch, 3 an”; bảo vệ môi trường; an sinh xã hội; Mẹ đỡ đầu; chuyển đổi số…</div>
+    <textarea id="ketQuaHoi" placeholder="Kết quả các nội dung công tác Hội trong kỳ..."></textarea>
+  </div>
+
+  <div class="form-group">
+    <label>5. Công tác tuyên truyền của chi hội:</label>
+    <div class="hint">Tổ chức các điểm tuyên truyền, nội dung và hình thức tuyên truyền.</div>
+    <textarea id="tuyenTruyen" placeholder="Hình thức, số buổi, số người tham dự, điểm tuyên truyền..."></textarea>
+  </div>
+
+  <div class="form-group">
+    <label>6. Hoạt động 20/10/2026:</label>
+    <div class="hint">Các hoạt động chào mừng, tổ chức nhân Ngày Phụ nữ Việt Nam 20/10/2026.</div>
+    <textarea id="hoatDong2010" placeholder="Hoạt động kỷ niệm Ngày Phụ nữ Việt Nam 20/10/2026..."></textarea>
+  </div>
+
+  <div class="form-group">
+    <label>7. Tham gia hoạt động Hội cấp trên:</label>
+    <div class="hint">Số lượt, thành phần hội viên tham gia hoạt động do Hội cấp trên tổ chức.</div>
+    <textarea id="hoiCapTren" placeholder="Các hoạt động, cuộc thi, hội nghị do Hội cấp trên tổ chức..."></textarea>
+  </div>
+
+  <div class="form-group">
+    <label>8. Đề xuất:</label>
+    <div class="hint">Đề xuất, kiến nghị để thực hiện tốt công tác Hội.</div>
+    <textarea id="deXuat" placeholder="Đề xuất, kiến nghị với Hội LHPN phường và các cấp..."></textarea>
+  </div>
+
+  <div class="actions">
+    <button class="btn-word" onclick="handleDownload()">📄 Tải Word<br>(Để lưu, tra cứu)</button>
+    <button class="btn-send" id="sendBtn" onclick="handleSend()">☁️ Gửi báo cáo<br>Cho phường</button>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <b>HỘI LIÊN HIỆP PHỤ NỮ PHƯỜNG THANH KHÊ <br> THÀNH PHỐ ĐÀ NẴNG</b><br>
+  <a href="admin.html" class="btn-admin">🔐 Trang quản trị</a>
+</footer>
+
+<!-- Toast container -->
+<div id="toastContainer" class="toast-container"></div>
+
+<script src="chihoi.js"></script>
+<script src="app.js"></script>
+<script>
+/* ================= WELCOME SCREEN ================= */
+const loginOverlay = document.getElementById("loginOverlay");
+const loginBtn     = document.getElementById("loginBtn");
+
+loginBtn.addEventListener("click", function() {
+  loginOverlay.style.display = "none";
+});
+</script>
+</body>
+</html>
